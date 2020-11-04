@@ -89,7 +89,7 @@ for k_ind=1:length(kappa)
     end
 
 end
-save('../results/CalCOFI_results_test.mat', 'errors_kFSA', 'errors_Nys', 'number_of_samples', 'kappas', 'epsilons');
+save('../results/CalCOFI_results.mat', 'errors_kFSA', 'errors_Nys', 'number_of_samples', 'kappas', 'epsilons');
 
 
 
