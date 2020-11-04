@@ -17,7 +17,7 @@ regression ............... methods for computing minimum-norm solutions of least
 
 ## Examples
 
-Numerical experiments from different application areas can be found in the directory `examples`. The included results (or recalculations of these) can be plotted by the functions `CalCOFI_plot`, `FPU_plot`, `MNIST_plot`.
+Numerical experiments from different application areas can be found in the directory `examples`. The included results in the directory `results` (or recalculations of these) can be plotted by the functions `CalCOFI_plot`, `FPU_plot`, `MNIST_plot`.
 
 ```
 CalCOFI .................. oceanographic time series analysis on CalCOFI data set, see [2]
