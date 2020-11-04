@@ -12,8 +12,7 @@
 function FPU_plot
 
 % load results
-data_full = load('../results/FPU_results_full.mat');
-data_kFSA = load('../results/FPU_results_kFSA.mat');
+data = load('../results/FPU_results.mat');
 
 % plot number of extracted samples
 figure;
@@ -31,7 +30,7 @@ colorOrder = get(gca, 'ColorOrder');
 lw = 2;   
 fs = 20;  
 set(gca,'ColorOrderIndex',1)
-plot(2:20, data_kFSA.number_of_samples_kFSA, ':o', 'Linewidth', lw, 'MarkerFaceColor', colorOrder(1,:))
+plot(2:20, data.number_of_samples_kFSA, ':o', 'Linewidth', lw, 'MarkerFaceColor', colorOrder(1,:))
 xlabel('$$d$$', 'Interpreter', 'LaTeX')
 ylabel('$$|\tilde{X}|$$', 'Interpreter', 'LaTeX')
 xticks(2:2:20)
@@ -61,16 +60,16 @@ for i=10.^[-11:-5]
   plot([2,20],[i,i], 'color', [0.8, 0.8, 0.8], 'Linewidth', 1.25, 'HandleVisibility','off')
 end
 colorOrder = get(gca, 'ColorOrder');
-y1 = prctile(data_full.errors_full,[5],1);
-y2 = prctile(data_full.errors_full,[95],1);
+y1 = prctile(data.errors_full,[5],1);
+y2 = prctile(data.errors_full,[95],1);
 patch([2:20 20:-1:2], [y1 fliplr(y2)],colorOrder(1,:),'EdgeColor','none','FaceAlpha',0.3,'HandleVisibility','off')
 set(gca,'ColorOrderIndex',1)
-plot(2:20,median(data_full.errors_full,1), 'Linewidth', lw)
-y1 = prctile(data_kFSA.errors_kFSA,[5],1);
-y2 = prctile(data_kFSA.errors_kFSA,[95],1);
+plot(2:20,median(data.errors_full,1), 'Linewidth', lw)
+y1 = prctile(data.errors_kFSA,[5],1);
+y2 = prctile(data.errors_kFSA,[95],1);
 patch([2:20 20:-1:2], [y1 fliplr(y2)],colorOrder(2,:),'EdgeColor','none','FaceAlpha',0.3,'HandleVisibility','off')
 set(gca,'ColorOrderIndex',2)
-plot(2:20,median(data_kFSA.errors_kFSA,1), 'Linewidth', lw)
+plot(2:20,median(data.errors_kFSA,1), 'Linewidth', lw)
 set(gca, 'YScale', 'log')
 xlabel('$$d$$', 'Interpreter', 'LaTeX')
 ylabel('$$|| \Theta^\prime - \Theta_{\mathsf{exact}} ||_F / || \Theta_{\mathsf{exact}} ||_F  $$', 'Interpreter', 'LaTeX')

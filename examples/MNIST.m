@@ -11,8 +11,8 @@
 function MNIST
 
 % parameters
-epsilon = 0.01:0.01:1;
 kappa = 0.1:0.1:1;
+epsilon = 0.01:0.01:1;
 reg_coeff = 10^-10;
 
 % load MNIST data (no included in repository)
@@ -77,10 +77,35 @@ for k = kappa
         classification_rate = classify(x_train, inds_all, x_test, y_test, kernel, theta);
 
         display(['kappa: ', num2str(k), ', eps: ',num2str(eps),', nos: ', num2str(number_of_samples), ', correct: ',num2str(classification_rate)])
-        %save(['MNIST_results_k_',num2str(k),'_eps_',num2str(eps),'.mat'], 'number_of_samples', 'classification_rate');
+        save(['../results/MNIST_results_k_',num2str(k),'_eps_',num2str(eps)], 'number_of_samples', 'classification_rate');
     end
 
 end
+
+save_as_single_file(kappa, epsilon);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+function save_as_single_file(kappa_list, epsilon_list)
+
+n = 1;
+number_of_samples = zeros(1,10);
+epsilon_list = [0, epsilon_list];
+for i=1:length(kappa_list)
+    for j=1:length(epsilon_list)
+        k = kappa_list(i);
+        eps = epsilon_list(j);
+        data = load(['../results/MNIST_results_k_',num2str(k),'_eps_',num2str(eps)], '-mat');
+        kappa(n) = k;
+        epsilon(n) = eps;
+        number_of_samples(n,:) = data.number_of_samples;
+        classification_rate(n) = data.classification_rate;
+        n = n + 1:
+    end
+end
+save('../results/MNIST_results.mat', 'kappa', 'epsilon', 'number_of_samples', 'classification_rate');
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  

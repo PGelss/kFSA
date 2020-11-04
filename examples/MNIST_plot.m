@@ -15,10 +15,11 @@ function MNIST_plot
 epsilon = [0, 0.01, 0.1, 0.25, 0.5];
 kappa = 0.5;
 numbers = zeros(1, 10);
+results = load('../results/MNIST_results.mat');
 for i=1:length(epsilon)
     eps = epsilon(i);
-    data = load(['../results/MNIST_results_k_', num2str(kappa),'_eps_', num2str(eps), '.mat']);
-    numbers(i,:) = data.number_of_samples;
+    ind = find((abs(results.kappa-0.5)<10^-8 & abs(results.epsilon-eps)<10^-8));
+    numbers(i,:) = results.number_of_samples(ind,:);
 end
 figure
 h = findobj(gca,'Type','line');
@@ -58,12 +59,13 @@ figure
 colorOrder = get(gca, 'ColorOrder');
 hold on;
 color_ind=1;
+results = load('../results/MNIST_results.mat');
 for k=kappa
 	numbers = zeros(1, 10);
 	for i=1:length(epsilon)
 	    eps = epsilon(i);
-	    data = load(['../results/MNIST_results_k_', num2str(k),'_eps_', num2str(eps)], '-mat');
-	    c(i) = data.classification_rate;
+	    ind = find((abs(results.kappa-k)<10^-8 & abs(results.epsilon-eps)<10^-8));
+	    c(i) = results.classification_rate(ind);
 	end
 	set(gca,'ColorOrderIndex',color_ind)
 	plot3(epsilon, k*ones(1, length(epsilon)), fliplr(c))

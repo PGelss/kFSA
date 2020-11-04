@@ -56,7 +56,6 @@ for k=1:1000
 
   end
 end
-save('../results/FPU_results_full.mat', 'errors_full');
 
 display(' ')
 
@@ -93,7 +92,7 @@ for k=1:100
     display(' ')
   end
 end
-save('../results/FPU_results_kFSA.mat', 'errors_kFSA', 'number_of_samples_kFSA');
+save('../results/FPU_results_kFSA.mat', 'errors_full', 'errors_kFSA', 'number_of_samples_kFSA');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
